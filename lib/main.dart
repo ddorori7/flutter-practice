@@ -19,3 +19,23 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("first app"),
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Text("hello"),
+            Text("hello"),
+            Text("hello"),
+          ],
+        ),
+      ),
+    );
+  }
+}
