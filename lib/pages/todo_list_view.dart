@@ -20,8 +20,10 @@ class _TodoListViewState extends State<TodoListView> {
   void initState() {
     todos = List.generate(
       20,
-      (i) => Todo('Todo $i',
-          'A description of what needs to be done for Todo $i', true),
+      (i) => Todo(
+          'Todo $i',
+          'A description of what needs kddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddto be done for Todo $i',
+          true),
     );
     super.initState();
   }
@@ -91,19 +93,34 @@ class _TodoListTab extends StatelessWidget {
     return ListView.builder(
       itemCount: todos.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(todos[index].title),
-          // 사용자가 ListTile을 선택하면, DetailScreen으로 이동합니다.
-          // DetailScreen을 생성할 뿐만 아니라, 현재 todo를 같이 전달해야
-          // 한다는 것을 명심하세요.
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailScreen(todo: todos[index]),
-              ),
-            );
-          },
+        return Container(
+          decoration: const BoxDecoration(
+              color: Colors.black12,
+              border:
+                  Border(bottom: BorderSide(color: Colors.white, width: 2))),
+          padding: const EdgeInsets.all(5),
+          child: ListTile(
+            leading: const Icon(
+              Icons.check_circle,
+              color: Colors.black54,
+              size: 25,
+            ),
+            title: Text(
+              todos[index].title,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black54),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailScreen(todo: todos[index]),
+                ),
+              );
+            },
+          ),
         );
       },
     );

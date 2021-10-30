@@ -16,13 +16,12 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: TodoAppbar(
         title: todo.title,
+        toEditPage: true,
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
         child: Text(todo.description,
-            style: const TextStyle(
-              fontSize: 20,
-            )),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
       ),
     );
   }
