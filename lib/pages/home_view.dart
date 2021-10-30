@@ -42,7 +42,7 @@ class HomeView extends StatelessWidget {
                 ),
                 onPressed: () {
                   // 투두리스트 페이지로
-                  Get.toNamed("/list");
+                  Get.toNamed("/todo-list");
                 },
                 child: const Text(
                   "START",

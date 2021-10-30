@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'pages/home_view.dart';
+import 'pages/todo_list_view.dart';
 
 // main(), runApp(위젯이 와야함) -> 함수(소문자 시작)
 // MyApp() (위젯) -> 클래스명(대문자시작)
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(),
-      getPages: [GetPage(name: '/list', page: () => ListView())],
+      getPages: [GetPage(name: '/todo-list', page: () => const TodoListView())],
     );
   }
 }
