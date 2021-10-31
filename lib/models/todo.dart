@@ -1,7 +1,8 @@
 class Todo {
-  final bool state; // 진행상태
-  final String title; // 제목
-  final String description; // 상세
+  bool important; // 중요
+  String title; // 제목
+  String description; // 상세
+  String deadline; // 기한
 
-  Todo(this.title, this.description, this.state);
+  Todo(this.title, this.description, this.important, this.deadline);
 }

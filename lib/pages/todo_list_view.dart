@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hello_world/models/todo.dart';
 import 'package:hello_world/widget/todo_appbar.dart';
 
@@ -12,6 +13,7 @@ class TodoListView extends StatefulWidget {
 }
 
 class _TodoListViewState extends State<TodoListView> {
+  String dropdownValue = 'One';
   int _selectedIndex = 0;
   String title = "TODO";
   List<Todo> todos = [];
@@ -23,7 +25,8 @@ class _TodoListViewState extends State<TodoListView> {
       (i) => Todo(
           'Todo $i',
           'A description of what needs kddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddto be done for Todo $i',
-          true),
+          true,
+          '2020-02-02'),
     );
     super.initState();
   }
@@ -68,19 +71,17 @@ class _TodoListViewState extends State<TodoListView> {
           ),
         ],
       ),
-      body: Center(
-        child: [
-          _TodoListTab(
-            todos: todos,
-          ),
-          const Text("Not Todos"),
-        ].elementAt(_selectedIndex),
-      ),
+      body: [
+        _TodoListTab(
+          todos: todos,
+        ),
+        const Text("Not Todos"),
+      ].elementAt(_selectedIndex),
     );
   }
 }
 
-class _TodoListTab extends StatelessWidget {
+class _TodoListTab extends StatefulWidget {
   final List<Todo> todos;
 
   const _TodoListTab({
@@ -89,9 +90,29 @@ class _TodoListTab extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<_TodoListTab> createState() => _TodoListTabState();
+}
+
+class _TodoListTabState extends State<_TodoListTab> {
+  List<Todo> todos = [];
+
+  @override
+  void initState() {
+    todos = List.generate(
+      20,
+      (i) => Todo(
+          'Todo $i',
+          'A description of what needs kddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddto be done for Todo $i',
+          true,
+          '2020-02-02'),
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: todos.length,
+      itemCount: widget.todos.length,
       itemBuilder: (context, index) {
         return Container(
           decoration: const BoxDecoration(
@@ -106,17 +127,20 @@ class _TodoListTab extends StatelessWidget {
               size: 25,
             ),
             title: Text(
-              todos[index].title,
+              widget.todos[index].title,
               style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                   color: Colors.black54),
             ),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailScreen(todo: todos[index]),
+              Get.to(
+                () => DetailScreen(
+                  todo: todos[index],
+                  onChangeImportant: (value) {
+                    print(value);
+                    setState(() => todos[index].important = value);
+                  },
                 ),
               );
             },
@@ -126,3 +150,27 @@ class _TodoListTab extends StatelessWidget {
     );
   }
 }
+
+//  DropdownButton<String>(
+//               value: dropdownValue,
+//               icon: const Icon(Icons.arrow_downward),
+//               iconSize: 24,
+//               elevation: 16,
+//               style: const TextStyle(color: Colors.deepPurple),
+//               underline: Container(
+//                 height: 2,
+//                 color: Colors.deepPurpleAccent,
+//               ),
+//               onChanged: (String? newValue) {
+//                 setState(() {
+//                   dropdownValue = newValue!;
+//                 });
+//               },
+//               items: <String>['One', 'Two', 'Free', 'Four']
+//                   .map<DropdownMenuItem<String>>((String value) {
+//                 return DropdownMenuItem<String>(
+//                   value: value,
+//                   child: Text(value),
+//                 );
+//               }).toList(),
+//             ),

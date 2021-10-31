@@ -35,7 +35,7 @@ class TodoAppbar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         addButton
             ? TextButton(
-                // TODO: 리스트에 추가할 수 있게! 모달 만들기
+                // TODO: 리스트에 추가할 수 있게! 페이지 만들기
                 onPressed: () {},
                 child: const Icon(
                   Icons.add,
